@@ -1,0 +1,34 @@
+{
+  "name": "kornel",
+  "version": "0.0.1",
+  "description": "a micro kernel library to build awesome & scalable apps",
+  "main": "kornel.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gigacool/kornel.git"
+  },
+  "keywords": [
+    "microkernel",
+    "bus",
+    "backbone",
+    "typescript"
+  ],
+  "author": "Cédric Hartland",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gigacool/kornel/issues"
+  },
+  "homepage": "https://github.com/gigacool/kornel#readme",
+  "dependencies": {
+    "jest": "^29.7.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.14.1",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.4"
+  }
+}
