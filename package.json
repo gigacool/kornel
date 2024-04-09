@@ -7,6 +7,7 @@
     "build": "rollup -c",
     "lint":"eslint ./sources/",
     "test": "jest",
+    "test-w": "jest --watch",
     "test-ci": "CI=true jest",
     "test-ci-win": "set CI=true && jest"
   },
