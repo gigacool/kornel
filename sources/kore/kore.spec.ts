@@ -100,6 +100,44 @@ describe('core component of the plugin orchhestrator', function(){
 
             expect(mockModule.initialize).toHaveBeenCalledTimes(1);
         });
+        
+        it('should run initialize method of multiple modules registered', function(){
+            let modules = [];
+            for(let i = 0; i < 3; i++){
+                const mockModule: ModuleInterface = {
+                    initialize: jest.fn()
+                  };
+                kore.register('mock-module-'+i, mockModule);
+                modules.push(mockModule);
+            }
+            
+            kore.run();
+
+            for(let i=0; i<modules.length;i++){
+                expect(modules[i].initialize).toHaveBeenCalledTimes(1);
+            }
+        });
+
+        it('should try and start despite failing modules', function(){
+            const mockModule: ModuleInterface = {
+                initialize: jest.fn()
+            };
+            const faultyModule: ModuleInterface = {
+                initialize: jest.fn().mockImplementation(() => {
+                    throw new Error('Some initialization error');
+              })
+            };
+            const logError = jest.spyOn(console, 'error');
+            kore.register('mock-module', mockModule);
+            kore.register('faulty-module', faultyModule);
+
+            kore.run();
+
+            expect(mockModule.initialize).toHaveBeenCalledTimes(1);
+            expect(logError).toHaveBeenCalledWith(`"faulty-module" failed to initialize`);
+        });
+
+        
     });
 
 });

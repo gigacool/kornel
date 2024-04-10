@@ -21,9 +21,13 @@ export class Kore {
 
     run():void {
         Object
-            .values(this.modules)
-            .forEach((module)=>{
-                module.initialize();
+            .entries(this.modules)
+            .forEach(([moduleIdentifier, module])=>{
+                try {
+                    module.initialize();
+                } catch(error){
+                    console.error(`"${moduleIdentifier}" failed to initialize`)
+                }
             })
     }
 }
