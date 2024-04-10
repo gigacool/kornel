@@ -47,6 +47,31 @@ describe('core component of the plugin orchhestrator', function(){
             expect(logError).toHaveBeenCalledWith(`A module has already been registered with module identifier "module". Second module will not be registered`);
         });
 
+        it('should enable chaining capability', function(){
+            const mockModule: ModuleInterface = {
+                initialize: jest.fn()
+              };
+            
+            let output = kore.register('mock-module', mockModule);
+
+            expect(output).toBe(kore);
+        });
+
+        
+        it('should enable chaining capability when registering fails', function(){
+            const okModule: ModuleInterface = {
+                initialize: jest.fn()
+            };
+            const nokModule: ModuleInterface = {
+                initialize: jest.fn()
+            };
+            
+            kore.register('mock-module', okModule);
+            let output = kore.register('mock-module', nokModule);
+
+            expect(output).toBe(kore);
+        });
+
     });
 
 });

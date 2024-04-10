@@ -10,12 +10,13 @@ export class Kore {
         this.modules = {};
     }
 
-    register(identifier:string, module:ModuleInterface): void {
+    register(identifier:string, module:ModuleInterface): Kore {
         if (this.modules[identifier]){
             console.error(`A module has already been registered with module identifier "${identifier}". Second module will not be registered`)
-            return;
+            return this;
         }
         this.modules[identifier] = module;
+        return this;
     }
 }
 
