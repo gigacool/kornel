@@ -1,7 +1,5 @@
 import { Bus } from './bus';
 
-// TODO - update tests to enable black box testing instead
-
 describe('bus component enabling communication accross modules', function(){
 
     it('should be defined', function(){
@@ -25,7 +23,8 @@ describe('bus component enabling communication accross modules', function(){
 
             bus.listen('general', callback);
 
-            expect(bus.channels['general']).toEqual([callback]);
+            bus.emit('general', {payload:'is listening'})
+            expect(callback).toHaveBeenCalledWith('is listening');
         });
 
         it('should register multiple callbacks for a given message channel', function(){
@@ -38,7 +37,10 @@ describe('bus component enabling communication accross modules', function(){
             bus.listen('general', callback2);
 
             // FIFO list
-            expect(bus.channels['general']).toEqual([callback, callback1, callback2]);
+            bus.emit('general', {payload:'is listening'})
+            expect(callback).toHaveBeenCalledWith('is listening');
+            expect(callback1).toHaveBeenCalledWith('is listening');
+            expect(callback2).toHaveBeenCalledWith('is listening');
         });
 
         it('should not register multiple times the same callbacks for a given message channel', function(){
@@ -49,8 +51,11 @@ describe('bus component enabling communication accross modules', function(){
             bus.listen('general', callback);
             bus.listen('general', callback);
 
-            expect(bus.channels['general']).toEqual([callback]);
+            bus.emit('general', {payload:'is listening'})
+            expect(callback).toHaveBeenCalledTimes(1)
+            expect(callback).toHaveBeenCalledWith('is listening');
             expect(logError).toHaveBeenCalledWith('callback is already listening on channel "general"')
+            expect(logError).toHaveBeenCalledTimes(2);
         });
 
         it('should enable chaining capability', function(){

@@ -5,7 +5,7 @@ import { Payload } from "../PayloadInterface";
 
 export class Bus {
 
-    channels:Channels;
+    private channels:Channels;
 
     constructor(){
         this.channels = {};
