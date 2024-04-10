@@ -74,4 +74,32 @@ describe('core component of the plugin orchhestrator', function(){
 
     });
 
+    describe('run modules', function(){
+
+        let kore:Kore;
+
+        beforeEach(function(){
+            kore = new Kore();
+        })
+
+        it('should be defined', function(){
+            expect(typeof kore.run).toBe('function');
+        });
+
+        it('should do nothing if no modules are registered', function(){
+            kore.run();
+        });
+
+        it('should run initialize method of a single module registered', function(){
+            const mockModule: ModuleInterface = {
+                initialize: jest.fn()
+              };
+            kore.register('mock-module', mockModule);
+
+            kore.run();
+
+            expect(mockModule.initialize).toHaveBeenCalledTimes(1);
+        });
+    });
+
 });

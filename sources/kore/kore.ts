@@ -18,6 +18,14 @@ export class Kore {
         this.modules[identifier] = module;
         return this;
     }
+
+    run():void {
+        Object
+            .values(this.modules)
+            .forEach((module)=>{
+                module.initialize();
+            })
+    }
 }
 
  
