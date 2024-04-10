@@ -24,6 +24,43 @@ kornel.use();
 //...
 ```
 
+Kornel basically provides a module registering mechanism and a bus communication system. Fundamental API should be something like:
+
+```typescript
+
+/** Message callback */
+type MessageCallback<T> = (payload: T) => void;
+
+/** Define a type for subscription identifier */
+type SubscriptionId = number;
+
+/** MessageBus interface */
+interface MessageBus {
+    subscribe<T>(channels: string[], callback: MessageCallback<T>): SubscriptionId;
+    unsubscribe(subscriptionId: SubscriptionId): void;
+    publish<T>(channel: string, payload: T): void;
+}
+
+// ... 
+
+/** Define a type for module registration */
+interface ModuleRegistration {
+    name: string;
+    initialize: () => void;
+    cleanup: () => void;
+}
+
+/** Define a type for module identifier */
+type ModuleId = number;
+
+/** Microkernel interface */
+interface Microkernel {
+    register(module: ModuleRegistration): ModuleId;
+    start(): void;
+}
+
+```
+
 ## Getting started
 
 This project is meant to uses
