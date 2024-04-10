@@ -2,6 +2,8 @@ import { Kore } from './kore';
 
 import { ModuleInterface } from '../ModuleInterface';
 
+// TODO - update tests to enable black box testing instead
+
 describe('core component of the plugin orchhestrator', function(){
 
     it('should be defined', function(){
@@ -45,6 +47,7 @@ describe('core component of the plugin orchhestrator', function(){
 
             expect(kore.modules['module']).toBe(okModule);
             expect(logError).toHaveBeenCalledWith(`A module has already been registered with module identifier "module". Second module will not be registered`);
+            logError.mockReset();
         });
 
         it('should enable chaining capability', function(){
@@ -135,9 +138,10 @@ describe('core component of the plugin orchhestrator', function(){
 
             expect(mockModule.initialize).toHaveBeenCalledTimes(1);
             expect(logError).toHaveBeenCalledWith(`"faulty-module" failed to initialize`);
+            logError.mockReset();
         });
 
-        
+
     });
 
 });
