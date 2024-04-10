@@ -1,7 +1,9 @@
 
-type Channels = Record<string, Function[]>; 
 
 import { Payload } from "../PayloadInterface";
+
+type CallbackFunction = (payload:string) => void;
+type Channels = Record<string, CallbackFunction[]>; 
 
 export class Bus {
 
@@ -11,7 +13,7 @@ export class Bus {
         this.channels = {};
     }
 
-    listen(channel:string, callback:Function):Bus {
+    listen(channel:string, callback:CallbackFunction):Bus {
         if (!this.channels[channel]){
             this.channels[channel] = [];
         }
@@ -25,7 +27,7 @@ export class Bus {
         return this;
     }
 
-    emit<T>(channel:string, payload:Payload<T>):void {
+    emit(channel:string, payload:Payload):void {
         this.channels[channel].forEach(function(callback){
             try {
                 callback(payload.payload);

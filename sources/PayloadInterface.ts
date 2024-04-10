@@ -1,3 +1,3 @@
-export interface Payload<T> {
-    payload:T
+export interface Payload {
+    payload:string
 }

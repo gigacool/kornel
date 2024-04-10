@@ -55,7 +55,7 @@ describe('core component of the plugin orchhestrator', function(){
                 initialize: jest.fn()
               };
             
-            let output = kore.register('mock-module', mockModule);
+            const output = kore.register('mock-module', mockModule);
 
             expect(output).toBe(kore);
         });
@@ -70,7 +70,7 @@ describe('core component of the plugin orchhestrator', function(){
             };
             
             kore.register('mock-module', okModule);
-            let output = kore.register('mock-module', nokModule);
+            const output = kore.register('mock-module', nokModule);
 
             expect(output).toBe(kore);
         });
@@ -105,7 +105,7 @@ describe('core component of the plugin orchhestrator', function(){
         });
         
         it('should run initialize method of multiple modules registered', function(){
-            let modules = [];
+            const modules = [];
             for(let i = 0; i < 3; i++){
                 const mockModule: ModuleInterface = {
                     initialize: jest.fn()

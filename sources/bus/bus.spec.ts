@@ -19,7 +19,7 @@ describe('bus component enabling communication accross modules', function(){
         });
 
         it('should register a callback for a given message channel', function(){
-            let callback = jest.fn();
+            const callback = jest.fn();
 
             bus.listen('general', callback);
 
@@ -28,9 +28,9 @@ describe('bus component enabling communication accross modules', function(){
         });
 
         it('should register multiple callbacks for a given message channel', function(){
-            let callback = jest.fn();
-            let callback1 = jest.fn();
-            let callback2 = jest.fn();
+            const callback = jest.fn();
+            const callback1 = jest.fn();
+            const callback2 = jest.fn();
 
             bus.listen('general', callback);
             bus.listen('general', callback1);
@@ -44,7 +44,7 @@ describe('bus component enabling communication accross modules', function(){
         });
 
         it('should not register multiple times the same callbacks for a given message channel', function(){
-            let callback = jest.fn();
+            const callback = jest.fn();
             const logError = jest.spyOn(console, 'error');
 
             bus.listen('general', callback);
@@ -59,16 +59,16 @@ describe('bus component enabling communication accross modules', function(){
         });
 
         it('should enable chaining capability', function(){
-            let output = bus.listen('general', jest.fn());
+            const output = bus.listen('general', jest.fn());
 
             expect(output).toBe(bus);
         });
 
         it('should enable chaining capability while failing', function(){
-            let callback = jest.fn();
+            const callback = jest.fn();
             bus.listen('general', callback);
             
-            let output = bus.listen('general', callback);
+            const output = bus.listen('general', callback);
             
             expect(output).toBe(bus);
         });
@@ -89,8 +89,8 @@ describe('bus component enabling communication accross modules', function(){
         });
 
         it('should be calling the callbacks registered for given channel', function(){
-            let callback = jest.fn();
-            let callback1 = jest.fn();
+            const callback = jest.fn();
+            const callback1 = jest.fn();
             bus.listen('general', callback);
             bus.listen('general', callback1);
 
@@ -101,10 +101,10 @@ describe('bus component enabling communication accross modules', function(){
         });
        
         it('should be calling the callbacks registered for given channel even if one fails', function(){
-            let callback =  jest.fn().mockImplementation(() => {
+            const callback =  jest.fn().mockImplementation(() => {
                 throw new Error('did not go well at roswell');
             });
-            let callback1 = jest.fn();
+            const callback1 = jest.fn();
             bus.listen('general', callback);
             bus.listen('general', callback1);
             const logError = jest.spyOn(console, 'error');
