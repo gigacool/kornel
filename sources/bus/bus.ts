@@ -2,6 +2,7 @@
 
 import { Payload } from "../PayloadInterface";
 import { BusInterface, CallbackFunction } from "./BusInterface";
+export { BusInterface, CallbackFunction } from "./BusInterface";
 
 export class Bus implements BusInterface {
 
@@ -26,7 +27,7 @@ export class Bus implements BusInterface {
     }
 
     emit(channel:string, payload:Payload):void {
-        this.channels[channel].forEach(function(callback){
+        (this.channels[channel] || []).forEach(function(callback:CallbackFunction){
             try {
                 callback(payload.payload);
             } catch(error){
@@ -34,5 +35,9 @@ export class Bus implements BusInterface {
                 console.error(error);
             }
         })
+        
+        if (channel !== '*'){
+            this.emit('*', payload);
+        }
     }
 }

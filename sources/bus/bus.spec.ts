@@ -27,6 +27,17 @@ describe('bus component enabling communication accross modules', function(){
             expect(callback).toHaveBeenCalledWith('is listening');
         });
 
+        it('should register a callback for all channels when using star wildcard', function(){
+            const callback = jest.fn();
+            const callbackForAll = jest.fn();
+
+            bus.listen('general', callback);
+            bus.listen('*', callbackForAll);
+
+            bus.emit('general', {payload:'is listening'})
+            expect(callbackForAll).toHaveBeenCalledWith('is listening');
+        });
+
         it('should register multiple callbacks for a given message channel', function(){
             const callback = jest.fn();
             const callback1 = jest.fn();
@@ -86,6 +97,10 @@ describe('bus component enabling communication accross modules', function(){
 
         it('should be defined', function(){
             expect(typeof bus.emit).toBe('function');
+        });
+
+        it('should not crash when emiting on unknown channel', function(){
+            bus.emit('unknown', {payload:'some message'})
         });
 
         it('should be calling the callbacks registered for given channel', function(){
