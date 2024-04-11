@@ -2,7 +2,8 @@
   "name": "kornel",
   "version": "0.0.1",
   "description": "a micro kernel library to build awesome & scalable apps",
-  "main": "kornel.js",
+  "main": "dist/kornel.js",
+  "types": "dist/kornel.d.ts", 
   "scripts": {
     "build": "rollup -c",
     "lint": "eslint ./sources/",
