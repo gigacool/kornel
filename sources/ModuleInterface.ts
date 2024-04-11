@@ -1,3 +1,5 @@
+import { BusInterface } from "./bus/BusInterface";
+
 export interface ModuleInterface {
-    initialize():void;
+    initialize(bus:BusInterface):void;
 }

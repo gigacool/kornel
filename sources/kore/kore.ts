@@ -1,13 +1,16 @@
 import { ModuleInterface } from '../ModuleInterface';
+import { BusInterface } from '../bus/BusInterface';
 
 type Modules = Record<string, ModuleInterface>; 
 
 export class Kore {
 
     modules: Modules;
+    private bus:BusInterface;
 
-    constructor(){
+    constructor(bus:BusInterface){
         this.modules = {};
+        this.bus = bus;
     }
 
     register(identifier:string, module:ModuleInterface): Kore {
@@ -24,7 +27,7 @@ export class Kore {
             .entries(this.modules)
             .forEach(([moduleIdentifier, module])=>{
                 try {
-                    module.initialize();
+                    module.initialize(this.bus);
                 } catch(error){
                     console.error(`"${moduleIdentifier}" failed to initialize`)
                 }

@@ -1,13 +1,11 @@
 
 
 import { Payload } from "../PayloadInterface";
+import { BusInterface, CallbackFunction } from "./BusInterface";
 
-type CallbackFunction = (payload:string) => void;
-type Channels = Record<string, CallbackFunction[]>; 
+export class Bus implements BusInterface {
 
-export class Bus {
-
-    private channels:Channels;
+    private channels:Record<string, CallbackFunction[]>;
 
     constructor(){
         this.channels = {};

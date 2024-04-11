@@ -1,5 +1,6 @@
 import { Kore } from './kore';
 
+import { BusInterface } from '../bus/BusInterface';
 import { ModuleInterface } from '../ModuleInterface';
 
 // TODO - update tests to enable black box testing instead
@@ -15,8 +16,11 @@ describe('core component of the plugin orchhestrator', function(){
         let kore:Kore;
 
         beforeEach(function(){
-            kore = new Kore();
-
+            const bus:BusInterface = {
+                listen:jest.fn(),
+                emit:jest.fn(),
+            }
+            kore = new Kore(bus);
         })
 
         it('should be defined', function(){
@@ -80,9 +84,14 @@ describe('core component of the plugin orchhestrator', function(){
     describe('run modules', function(){
 
         let kore:Kore;
+        let bus:BusInterface;
 
         beforeEach(function(){
-            kore = new Kore();
+            bus = {
+                listen:jest.fn(),
+                emit:jest.fn(),
+            }
+            kore = new Kore(bus);
         })
 
         it('should be defined', function(){
@@ -102,6 +111,7 @@ describe('core component of the plugin orchhestrator', function(){
             kore.run();
 
             expect(mockModule.initialize).toHaveBeenCalledTimes(1);
+            expect(mockModule.initialize).toHaveBeenCalledWith(bus)
         });
         
         it('should run initialize method of multiple modules registered', function(){
@@ -118,6 +128,8 @@ describe('core component of the plugin orchhestrator', function(){
 
             for(let i=0; i<modules.length;i++){
                 expect(modules[i].initialize).toHaveBeenCalledTimes(1);
+                expect(modules[i].initialize).toHaveBeenCalledWith(bus)
+
             }
         });
 
