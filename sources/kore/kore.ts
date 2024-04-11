@@ -5,7 +5,7 @@ type Modules = Record<string, ModuleInterface>;
 
 export class Kore {
 
-    modules: Modules;
+    private modules: Modules;
     private bus:BusInterface;
 
     constructor(bus:BusInterface){

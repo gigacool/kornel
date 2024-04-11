@@ -3,8 +3,6 @@ import { Kore } from './kore';
 import { BusInterface } from '../bus/BusInterface';
 import { ModuleInterface } from '../ModuleInterface';
 
-// TODO - update tests to enable black box testing instead
-
 describe('core component of the plugin orchhestrator', function(){
 
     it('should be defined', function(){
@@ -34,7 +32,8 @@ describe('core component of the plugin orchhestrator', function(){
             
             kore.register('mock-module', mockModule);
 
-            expect(kore.modules['mock-module']).toBe(mockModule);
+            kore.run();
+            expect(mockModule.initialize).toHaveBeenCalledTimes(1);
         });
 
         it('should not register a module with duplicate identifier', function(){
@@ -49,7 +48,9 @@ describe('core component of the plugin orchhestrator', function(){
             
             kore.register('module', nokModule);
 
-            expect(kore.modules['module']).toBe(okModule);
+            kore.run();
+            expect(okModule.initialize).toHaveBeenCalledTimes(1);
+            expect(nokModule.initialize).toHaveBeenCalledTimes(0);
             expect(logError).toHaveBeenCalledWith(`A module has already been registered with module identifier "module". Second module will not be registered`);
             logError.mockReset();
         });
