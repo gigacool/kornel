@@ -1,7 +1,8 @@
 import { ModuleInterface } from '../ModuleInterface';
 import { BusInterface } from '../bus/BusInterface';
+import { Options } from '../OptionsInterface';
 
-type Modules = Record<string, ModuleInterface>; 
+type Modules = Record<string, {module:ModuleInterface, options?:Options}>; 
 
 export class Kore {
 
@@ -13,21 +14,21 @@ export class Kore {
         this.bus = bus;
     }
 
-    register(identifier:string, module:ModuleInterface): Kore {
+    register(identifier:string, module:ModuleInterface, options?:Options): Kore {
         if (this.modules[identifier]){
             console.error(`A module has already been registered with module identifier "${identifier}". Second module will not be registered`)
             return this;
         }
-        this.modules[identifier] = module;
+        this.modules[identifier] = {module:module, options:options};
         return this;
     }
 
     run():void {
         Object
             .entries(this.modules)
-            .forEach(([moduleIdentifier, module])=>{
+            .forEach(([moduleIdentifier, moduleRegistry])=>{
                 try {
-                    module.initialize(this.bus);
+                    moduleRegistry.module.initialize(this.bus, moduleRegistry.options);
                 } catch(error){
                     console.error(`"${moduleIdentifier}" failed to initialize`)
                 }

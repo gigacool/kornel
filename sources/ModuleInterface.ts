@@ -1,5 +1,6 @@
 import { BusInterface } from "./bus/BusInterface";
+import { Options } from "./OptionsInterface";
 
 export interface ModuleInterface {
-    initialize(bus:BusInterface):void;
+    initialize(bus:BusInterface, options?:Options):void;
 }

@@ -12,9 +12,10 @@ describe('core component of the plugin orchhestrator', function(){
     describe('register module', function(){
 
         let kore:Kore;
+        let bus:BusInterface;
 
         beforeEach(function(){
-            const bus:BusInterface = {
+            bus = {
                 listen:jest.fn(),
                 emit:jest.fn(),
             }
@@ -34,6 +35,18 @@ describe('core component of the plugin orchhestrator', function(){
 
             kore.run();
             expect(mockModule.initialize).toHaveBeenCalledTimes(1);
+        });
+
+        it('should accept an optional option property', function(){
+            const mockModule: ModuleInterface = {
+                initialize: jest.fn()
+              };
+            const options = {optionA:"value A", optionB:"Value B"};
+            kore.register('mock-module', mockModule, options);
+
+            kore.run();
+            expect(mockModule.initialize).toHaveBeenCalledTimes(1);
+            expect(mockModule.initialize).toHaveBeenCalledWith(bus, options);
         });
 
         it('should not register a module with duplicate identifier', function(){
@@ -112,7 +125,7 @@ describe('core component of the plugin orchhestrator', function(){
             kore.run();
 
             expect(mockModule.initialize).toHaveBeenCalledTimes(1);
-            expect(mockModule.initialize).toHaveBeenCalledWith(bus)
+            expect(mockModule.initialize).toHaveBeenCalledWith(bus, undefined)
         });
         
         it('should run initialize method of multiple modules registered', function(){
@@ -129,7 +142,7 @@ describe('core component of the plugin orchhestrator', function(){
 
             for(let i=0; i<modules.length;i++){
                 expect(modules[i].initialize).toHaveBeenCalledTimes(1);
-                expect(modules[i].initialize).toHaveBeenCalledWith(bus)
+                expect(modules[i].initialize).toHaveBeenCalledWith(bus, undefined)
 
             }
         });
