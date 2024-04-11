@@ -1,6 +1,6 @@
 # kornel
 
-[![Build Status](https://github.com/gigacool/kornel/workflows/CI/badge.svg)](https://github.com/gigacool/kornel/actions)
+[![Node.js CI](https://github.com/gigacool/kornel/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/gigacool/kornel/actions/workflows/node.js.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 This repository contains a Micro Kernel library to build awesome &amp; scalable apps
