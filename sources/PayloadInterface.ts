@@ -1,3 +1,3 @@
 export interface Payload {
-    payload:string
+    payload:any
 }
