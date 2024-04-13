@@ -24,13 +24,22 @@ export class Kore {
     }
 
     run():void {
-        Object
+        Object // initialize all modules
             .entries(this.modules)
             .forEach(([moduleIdentifier, moduleRegistry])=>{
                 try {
                     moduleRegistry.module.initialize(this.bus, moduleRegistry.options);
                 } catch(error){
                     console.error(`"${moduleIdentifier}" failed to initialize`)
+                }
+            })
+        Object // then start the modules
+            .entries(this.modules)
+            .forEach(([moduleIdentifier, moduleRegistry])=>{
+                try {
+                    moduleRegistry.module.start();
+                } catch(error){
+                    console.error(`"${moduleIdentifier}" failed to start`)
                 }
             })
     }

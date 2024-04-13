@@ -26,13 +26,15 @@ describe('library interation test', function(){
         const moduleListener:ModuleInterface = {
             initialize(bus) {
                 bus.listen('test', onMessage);
-            }
+            },
+            start(){}
         }
 
         const moduleEmiter:ModuleInterface = {
             initialize(bus) {
                 bus.emit('test', {payload:payload});
             },
+            start(){}
         }
         kore.register('module-listener', moduleListener);
         kore.register('module-emiter', moduleEmiter);

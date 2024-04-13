@@ -28,7 +28,8 @@ describe('core component of the plugin orchhestrator', function(){
 
         it('should register a module', function(){
             const mockModule: ModuleInterface = {
-                initialize: jest.fn()
+                initialize: jest.fn(),
+                start:jest.fn()
               };
             
             kore.register('mock-module', mockModule);
@@ -39,7 +40,8 @@ describe('core component of the plugin orchhestrator', function(){
 
         it('should accept an optional option property', function(){
             const mockModule: ModuleInterface = {
-                initialize: jest.fn()
+                initialize: jest.fn(),
+                start:jest.fn()
               };
             const options = {optionA:"value A", optionB:"Value B"};
             kore.register('mock-module', mockModule, options);
@@ -51,10 +53,12 @@ describe('core component of the plugin orchhestrator', function(){
 
         it('should not register a module with duplicate identifier', function(){
             const okModule: ModuleInterface = {
-                initialize: jest.fn()
+                initialize: jest.fn(),
+                start:jest.fn()
             };
             const nokModule: ModuleInterface = {
-                initialize: jest.fn()
+                initialize: jest.fn(),
+                start:jest.fn()
             };
             const logError = jest.spyOn(console, 'error');
             kore.register('module', okModule);
@@ -70,7 +74,8 @@ describe('core component of the plugin orchhestrator', function(){
 
         it('should enable chaining capability', function(){
             const mockModule: ModuleInterface = {
-                initialize: jest.fn()
+                initialize: jest.fn(),
+                start:jest.fn()
               };
             
             const output = kore.register('mock-module', mockModule);
@@ -81,10 +86,12 @@ describe('core component of the plugin orchhestrator', function(){
         
         it('should enable chaining capability when registering fails', function(){
             const okModule: ModuleInterface = {
-                initialize: jest.fn()
+                initialize: jest.fn(),
+                start:jest.fn()
             };
             const nokModule: ModuleInterface = {
-                initialize: jest.fn()
+                initialize: jest.fn(),
+                start:jest.fn()
             };
             
             kore.register('mock-module', okModule);
@@ -117,8 +124,11 @@ describe('core component of the plugin orchhestrator', function(){
         });
 
         it('should run initialize method of a single module registered', function(){
+
+            const callOrder:string[] = [];
             const mockModule: ModuleInterface = {
-                initialize: jest.fn()
+                initialize: jest.fn().mockImplementation(() => callOrder.push('init')),
+                start:jest.fn().mockImplementation(() => callOrder.push('start'))
               };
             kore.register('mock-module', mockModule);
 
@@ -126,13 +136,17 @@ describe('core component of the plugin orchhestrator', function(){
 
             expect(mockModule.initialize).toHaveBeenCalledTimes(1);
             expect(mockModule.initialize).toHaveBeenCalledWith(bus, undefined)
+
+            expect(mockModule.start).toHaveBeenCalledTimes(1);
+            expect(callOrder).toEqual(['init', 'start']);
         });
         
         it('should run initialize method of multiple modules registered', function(){
             const modules = [];
             for(let i = 0; i < 3; i++){
                 const mockModule: ModuleInterface = {
-                    initialize: jest.fn()
+                    initialize: jest.fn(),
+                    start:jest.fn()
                   };
                 kore.register('mock-module-'+i, mockModule);
                 modules.push(mockModule);
@@ -147,14 +161,16 @@ describe('core component of the plugin orchhestrator', function(){
             }
         });
 
-        it('should try and start despite failing modules', function(){
+        it('should try and initialize despite failing modules', function(){
             const mockModule: ModuleInterface = {
-                initialize: jest.fn()
+                initialize: jest.fn(),
+                start:jest.fn()
             };
             const faultyModule: ModuleInterface = {
                 initialize: jest.fn().mockImplementation(() => {
                     throw new Error('Some initialization error');
-              })
+                }),
+                start:jest.fn()
             };
             const logError = jest.spyOn(console, 'error');
             kore.register('mock-module', mockModule);
@@ -164,6 +180,28 @@ describe('core component of the plugin orchhestrator', function(){
 
             expect(mockModule.initialize).toHaveBeenCalledTimes(1);
             expect(logError).toHaveBeenCalledWith(`"faulty-module" failed to initialize`);
+            logError.mockReset();
+        });
+
+        it('should try and start despite failing modules', function(){
+            const mockModule: ModuleInterface = {
+                initialize: jest.fn(),
+                start:jest.fn()
+            };
+            const faultyModule: ModuleInterface = {
+                initialize:jest.fn(),
+                start: jest.fn().mockImplementation(() => {
+                    throw new Error('Some initialization error');
+                }),
+            };
+            const logError = jest.spyOn(console, 'error');
+            kore.register('mock-module', mockModule);
+            kore.register('faulty-module', faultyModule);
+
+            kore.run();
+
+            expect(mockModule.initialize).toHaveBeenCalledTimes(1);
+            expect(logError).toHaveBeenCalledWith(`"faulty-module" failed to start`);
             logError.mockReset();
         });
 
