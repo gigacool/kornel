@@ -23,19 +23,22 @@ export const titleModule = function():ModuleInterface{
       <h3>number of messages since session start: <em>${count}</em></h3>
       `; 
     }
-  
+    
     return {
         initialize:function(bus, options:{id:string, title:string}):void {
           communicationBus = bus;
           id = options.id;
           title = options.title;
         
-          render();
+          
   
           bus.listen('*', ()=>{
             count++;
             render()
           })
+        },
+        start:function():void {
+          render();
         }
       }
   } 

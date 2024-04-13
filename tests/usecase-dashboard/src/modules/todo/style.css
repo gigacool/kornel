@@ -1,0 +1,24 @@
+.todo-tile {
+    
+}
+
+.todo-container {
+    padding-top:8px; 
+}
+
+.todo-container input[type='text'] {
+    width: 65%;
+    height: 22px;
+    box-sizing: border-box;
+}
+
+.todo-container button {
+    width: 35%;
+    height: 22px;
+    float: right;
+    box-sizing: border-box;
+}
+
+.todo-container ul {
+    margin-top: 40px;
+}

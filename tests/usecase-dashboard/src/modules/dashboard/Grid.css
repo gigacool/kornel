@@ -1,0 +1,30 @@
+.react-grid-item {
+    background-color: #454545;
+    border: none;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.react-grid-item h4 {
+    position: relative;
+    margin: 0;
+    padding-bottom: 0.3rem;
+    border-bottom: solid thin rgba(255,255,255,0.87);
+}
+
+.react-grid-item ul {
+    list-style-type: none;
+    padding-inline-start: 0;
+    position: absolute;
+    top: 40px;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0.2rem;
+    padding: 0.2rem 0.4rem ;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.react-grid-item li {
+    margin-bottom: 0.5rem;
+}
