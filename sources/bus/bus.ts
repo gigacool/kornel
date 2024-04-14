@@ -29,7 +29,7 @@ export class Bus implements BusInterface {
     emit(channel:string, payload:Payload):void {
         (this.channels[channel] || []).forEach(function(callback:CallbackFunction){
             try {
-                callback(payload.payload);
+                callback(channel, payload.payload);
             } catch(error){
                 console.error(`callback threw while running`);
                 console.error(error);

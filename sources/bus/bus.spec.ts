@@ -24,7 +24,7 @@ describe('bus component enabling communication accross modules', function(){
             bus.listen('general', callback);
 
             bus.emit('general', {payload:'is listening'})
-            expect(callback).toHaveBeenCalledWith('is listening');
+            expect(callback).toHaveBeenCalledWith('general','is listening');
         });
 
         it('should register a callback for all channels when using star wildcard', function(){
@@ -35,7 +35,7 @@ describe('bus component enabling communication accross modules', function(){
             bus.listen('*', callbackForAll);
 
             bus.emit('general', {payload:'is listening'})
-            expect(callbackForAll).toHaveBeenCalledWith('is listening');
+            expect(callbackForAll).toHaveBeenCalledWith('*','is listening');
         });
 
         it('should register multiple callbacks for a given message channel', function(){
@@ -49,9 +49,9 @@ describe('bus component enabling communication accross modules', function(){
 
             // FIFO list
             bus.emit('general', {payload:'is listening'})
-            expect(callback).toHaveBeenCalledWith('is listening');
-            expect(callback1).toHaveBeenCalledWith('is listening');
-            expect(callback2).toHaveBeenCalledWith('is listening');
+            expect(callback).toHaveBeenCalledWith('general','is listening');
+            expect(callback1).toHaveBeenCalledWith('general','is listening');
+            expect(callback2).toHaveBeenCalledWith('general','is listening');
         });
 
         it('should not register multiple times the same callbacks for a given message channel', function(){
@@ -64,7 +64,7 @@ describe('bus component enabling communication accross modules', function(){
 
             bus.emit('general', {payload:'is listening'})
             expect(callback).toHaveBeenCalledTimes(1)
-            expect(callback).toHaveBeenCalledWith('is listening');
+            expect(callback).toHaveBeenCalledWith('general','is listening');
             expect(logError).toHaveBeenCalledWith('callback is already listening on channel "general"')
             expect(logError).toHaveBeenCalledTimes(2);
         });
@@ -111,8 +111,8 @@ describe('bus component enabling communication accross modules', function(){
 
             bus.emit('general', {payload:'some message'})
 
-            expect(callback).toHaveBeenCalledWith('some message');
-            expect(callback1).toHaveBeenCalledWith('some message');
+            expect(callback).toHaveBeenCalledWith('general','some message');
+            expect(callback1).toHaveBeenCalledWith('general', 'some message');
         });
        
         it('should be calling the callbacks registered for given channel even if one fails', function(){
@@ -129,8 +129,8 @@ describe('bus component enabling communication accross modules', function(){
             
             expect(logError).toHaveBeenCalledWith('callback threw while running')
             expect(logError).toHaveBeenCalledTimes(2);
-            expect(callback).toHaveBeenCalledWith('some message');
-            expect(callback1).toHaveBeenCalledWith('some message');
+            expect(callback).toHaveBeenCalledWith('general','some message');
+            expect(callback1).toHaveBeenCalledWith('general','some message');
         });
 
 

@@ -41,7 +41,7 @@ describe('library interation test', function(){
 
         kore.run();
 
-        expect(onMessage).toHaveBeenCalledWith(payload);
+        expect(onMessage).toHaveBeenCalledWith('test',payload);
         expect(onMessage).toHaveBeenCalledTimes(1);
 
 
