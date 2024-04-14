@@ -34,10 +34,16 @@ export class Bus implements BusInterface {
                 console.error(`callback threw while running`);
                 console.error(error);
             }
-        })
+        });
         
-        if (channel !== '*'){
-            this.emit('*', payload);
-        }
+        (this.channels['*'] || []).forEach(function(callback:CallbackFunction){
+            try {
+                callback(channel, payload.payload);
+            } catch(error){
+                console.error(`callback threw while running`);
+                console.error(error);
+            }
+        });
+
     }
 }

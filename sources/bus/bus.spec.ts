@@ -35,7 +35,7 @@ describe('bus component enabling communication accross modules', function(){
             bus.listen('*', callbackForAll);
 
             bus.emit('general', {payload:'is listening'})
-            expect(callbackForAll).toHaveBeenCalledWith('*','is listening');
+            expect(callbackForAll).toHaveBeenCalledWith('general','is listening');
         });
 
         it('should register multiple callbacks for a given message channel', function(){
@@ -122,6 +122,24 @@ describe('bus component enabling communication accross modules', function(){
             const callback1 = jest.fn();
             bus.listen('general', callback);
             bus.listen('general', callback1);
+            const logError = jest.spyOn(console, 'error');
+            expect(logError).toHaveBeenCalledTimes(0);
+
+            bus.emit('general', {payload:'some message'})
+            
+            expect(logError).toHaveBeenCalledWith('callback threw while running')
+            expect(logError).toHaveBeenCalledTimes(2);
+            expect(callback).toHaveBeenCalledWith('general','some message');
+            expect(callback1).toHaveBeenCalledWith('general','some message');
+        });
+
+        it('should be calling the callbacks registered for * channel even if one fails', function(){
+            const callback =  jest.fn().mockImplementation(() => {
+                throw new Error('did not go well at roswell');
+            });
+            const callback1 = jest.fn();
+            bus.listen('*', callback);
+            bus.listen('*', callback1);
             const logError = jest.spyOn(console, 'error');
             expect(logError).toHaveBeenCalledTimes(0);
 
