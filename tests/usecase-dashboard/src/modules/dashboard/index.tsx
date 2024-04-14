@@ -8,12 +8,13 @@ import { Grid } from './Grid';
 // render a dashboard full of widgets
 // widgets are registered via the REGISTER_DASHBOARD_WIDGET message
 
-
 export type Widgets = Record<string, React.FC>;
 
 export const dashboardModule = function():ModuleInterface {
     let communicationBus:BusInterface; 
     let id:string = '';
+
+    let isEditing = false;
     
     let widgets:Widgets = {};
 
@@ -22,10 +23,13 @@ export const dashboardModule = function():ModuleInterface {
             communicationBus = bus;
             id = options.id;
 
-            communicationBus.listen('REGISTER_DASHBOARD_WIDGET', (payload:{id:string, widget:React.FC}) => {
+            communicationBus.listen('REGISTER_DASHBOARD_WIDGET', (channel:string, payload:{id:string, widget:React.FC}) => {
                 let id:string = payload.id;
                 widgets[id] = payload.widget; 
             });
+
+
+
 
             
         },
@@ -34,7 +38,7 @@ export const dashboardModule = function():ModuleInterface {
             if (element){
                 ReactDOM.createRoot(element).render(
                 <React.StrictMode>
-                    <Grid widgets={widgets} bus={communicationBus} />
+                    <Grid widgets={widgets}  bus={communicationBus} />
                 </React.StrictMode>,
                 )
             }

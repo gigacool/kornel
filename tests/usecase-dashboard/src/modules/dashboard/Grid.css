@@ -1,9 +1,140 @@
+
+#grid {
+  position: absolute;
+  top:100px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+}
+
 .react-grid-item {
     background-color: #454545;
     border: none;
     padding: 1rem;
     box-sizing: border-box;
+    margin-top: 30px;
 }
+
+.react-grid-item.blue {
+    background-color: #508aad; /* Darker shade of pastel blue */
+    color: #fafafa; /* White text for contrast */
+  }
+  
+  /* Styling for input elements within .react-grid-item.blue */
+  .react-grid-item.blue input {
+    background-color: #3c7aa1; /* Darker shade of pastel blue for input background */
+    border-color: #5f8a9d; /* Darker shade of border color */
+    color: #fafafa; /* Darker shade of text color */
+  }
+
+  .react-grid-item.blue input::placeholder{
+    color: #ccc; /* Darker shade of text color */
+  }
+  
+  /* Styling for button elements within .react-grid-item.blue */
+  .react-grid-item.blue button {
+    background-color: #3c7aa1; /* Darker shade of pastel blue for button background */
+    border-color: #5f8a9d; /* Darker shade of border color */
+    color: #fafafa; /* Darker shade of text color */
+  }
+
+  .react-grid-item.pink {
+    background-color: #de7b6d; /* Darker shade of pastel pink */
+    color: #fafafa; /* White text for contrast */
+  }
+  
+  /* Styling for input elements within .react-grid-item.pink */
+  .react-grid-item.pink input {
+    background-color: #ae5e52; /* Darker shade of pastel pink for input background */
+    border-color: #bb7c73; /* Darker shade of border color */
+    color: #fafafa; /* White text color */
+  }
+  
+  /* Styling for button elements within .react-grid-item.pink */
+  .react-grid-item.pink button {
+    background-color: #ae5e52; /* Darker shade of pastel pink for button background */
+    border-color: #bb7c73; /* Darker shade of border color */
+    color: #fafafa; /* White text color */
+  }
+
+  /* Dark Pastel Green */
+.react-grid-item.green {
+    background-color: #81b760; /* Darker shade of pastel green */
+    color: #fafafa; /* White text for contrast */
+  }
+  
+  /* Styling for input elements within .react-grid-item.green */
+  .react-grid-item.green input {
+    background-color: #5d944e; /* Darker shade of pastel green for input background */
+    border-color: #729a65; /* Darker shade of border color */
+    color: #fafafa; /* White text color */
+  }
+  
+  /* Styling for button elements within .react-grid-item.green */
+  .react-grid-item.green button {
+    background-color: #5d944e; /* Darker shade of pastel green for button background */
+    border-color: #729a65; /* Darker shade of border color */
+    color: #fafafa; /* White text color */
+  }
+  /* Dark Pastel Purple */
+.react-grid-item.purple {
+    background-color: #9b70c8; /* Darker shade of pastel purple */
+    color: #fafafa; /* White text for contrast */
+  }
+  
+  /* Styling for input elements within .react-grid-item.purple */
+  .react-grid-item.purple input {
+    background-color: #7c519e; /* Darker shade of pastel purple for input background */
+    border-color: #8f74b2; /* Darker shade of border color */
+    color: #fafafa; /* White text color */
+  }
+  
+  /* Styling for button elements within .react-grid-item.purple */
+  .react-grid-item.purple button {
+    background-color: #7c519e; /* Darker shade of pastel purple for button background */
+    border-color: #8f74b2; /* Darker shade of border color */
+    color: #fafafa; /* White text color */
+  }
+/* Dark Pastel Peach */
+.react-grid-item.peach {
+    background-color: #e6a1af; /* Darker shade of pastel peach */
+    color: #333; /* Dark text for contrast */
+  }
+  
+  /* Styling for input elements within .react-grid-item.peach */
+  .react-grid-item.peach input {
+    background-color: #b47580; /* Darker shade of pastel peach for input background */
+    border-color: #cc8a96; /* Darker shade of border color */
+    color: #333; /* Dark text color */
+  }
+  
+  /* Styling for button elements within .react-grid-item.peach */
+  .react-grid-item.peach button {
+    background-color: #b47580; /* Darker shade of pastel peach for button background */
+    border-color: #cc8a96; /* Darker shade of border color */
+    color: #333; /* Dark text color */
+  }
+/* Dark Pastel Yellow */
+.react-grid-item.yellow {
+    background-color: #e7c86f; /* Darker shade of pastel yellow */
+    color: #333; /* Dark text for contrast */
+  }
+  
+  /* Styling for input elements within .react-grid-item.yellow */
+  .react-grid-item.yellow input {
+    background-color: #baa264; /* Darker shade of pastel yellow for input background */
+    border-color: #d0b078; /* Darker shade of border color */
+    color: #333; /* Dark text color */
+  }
+  
+  /* Styling for button elements within .react-grid-item.yellow */
+  .react-grid-item.yellow button {
+    background-color: #baa264; /* Darker shade of pastel yellow for button background */
+    border-color: #d0b078; /* Darker shade of border color */
+    color: #333; /* Dark text color */
+  }
+      
 
 .react-grid-item h4 {
     position: relative;

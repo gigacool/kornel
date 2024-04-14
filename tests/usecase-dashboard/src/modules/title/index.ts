@@ -1,15 +1,25 @@
 import { BusInterface, ModuleInterface } from 'kornel';
 
+import './index.css';
+
 // dirty demo code
 // grab an id to create piece of rendering
 // update rendering whenever an event goes through the bus
+
 
 export const titleModule = function():ModuleInterface{
     let communicationBus:BusInterface; 
     let count = 0;
     let title = 'no title yet';
     let id = '';
+    let isEditing = false;
+
+    function edit(){
+      isEditing = !isEditing;
+      communicationBus.emit('GLOBAL_EDIT_MODE', {payload:{status:isEditing}});
+    }
     
+
     function render():void {
         
       let element = document.getElementById(id);
@@ -21,9 +31,15 @@ export const titleModule = function():ModuleInterface{
       element.innerHTML=`
       <h1>${title}</h1>
       <h3>number of messages since session start: <em>${count}</em></h3>
+      <div id="activate-page-edition" onClick="${edit}">${isEditing ? 'stop':'start'} editing page</div>
       `; 
+
+      let editElement = document.getElementById('activate-page-edition');
+      if (editElement){
+        editElement.onclick = function(){edit()};
+      }
     }
-    
+
     return {
         initialize:function(bus, options:{id:string, title:string}):void {
           communicationBus = bus;

@@ -1,0 +1,10 @@
+.event-button-tile button {
+    position: absolute;
+    top: 3.2rem;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    padding: 10px 20px;
+    
+}
+

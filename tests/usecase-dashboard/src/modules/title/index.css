@@ -1,0 +1,14 @@
+#activate-page-edition {
+    display: block;
+    position:absolute;
+    right: 20px;
+    top: 20px;
+    padding: 1rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    user-select: none;
+}
+
+#activate-page-edition:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}

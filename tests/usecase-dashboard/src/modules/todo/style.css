@@ -22,3 +22,12 @@
 .todo-container ul {
     margin-top: 40px;
 }
+
+.todo-container label {
+    display: block;
+    transition: all 0.3s;
+}
+
+.todo-container label:hover {
+    background-color: rgba(0,0,0,0.1);
+}

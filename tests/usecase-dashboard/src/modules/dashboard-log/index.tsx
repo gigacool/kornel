@@ -17,20 +17,17 @@ export const LogTileWidget = function():ModuleInterface{
   let communicationBus:BusInterface; 
 
   const LogTile: React.FC = () => {
-    console.log('log')
     
     const [items, setItems] = useState<LogItem[]>([]);
-    const handlePropChange = (newValue:any) => {
-      console.log('handle prop change')
-      if (newValue === lastValue){
-        return;
-      }
+    const handlePropChange = (channel:string, newValue:any) => {
+      // if (newValue === lastValue){
+      //   return;
+      // }
       const newEntry = {
         timestamp:Date.now(), 
-        channel:'oups', 
+        channel:channel, 
         log:JSON.stringify(newValue)
       };
-      console.log('event comming')
       setItems((prevItems) => {
         // if(prevItems.find((entry)=>entry.log == newEntry.log)){
         //   return prevItems;

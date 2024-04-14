@@ -18,6 +18,12 @@ type ITodoProps = {
   bus: BusInterface
 };
 
+type WidgetProps = {
+  bus: BusInterface,
+  style?:Record<string,string|number>,
+  properties?:Record<string,string|number>
+}
+
 const TodoItem: React.FC<ITodoProps> = ({todo, bus}:ITodoProps) => {
 
   let [checked, setChecked] = useState(todo.status);
@@ -63,7 +69,7 @@ const Todo:React.FC<{bus:BusInterface}> = ({bus}) => {
   }
   
   return (
-    <div className="todo-container">
+    <div className="todo-container" style={{}}>
       <input 
         type="text" 
         value={todoInput} 
@@ -82,10 +88,12 @@ const Todo:React.FC<{bus:BusInterface}> = ({bus}) => {
 export const TodoModule = function():ModuleInterface{
   let communicationBus:BusInterface; 
 
-  const TodoDashboardTile: React.FC<{bus:BusInterface}> = ({bus:BusInterface}) => {
+  const TodoDashboardTile: React.FC<WidgetProps> = ({style, properties}) => {
+    const title = properties?.title || 'Todo'; 
+
     return (
-      <div className="todo-tile">
-        <h4>Todo</h4>
+      <div className="todo-tile" style={style}>
+        <h4>{title}</h4>
         <Todo bus={communicationBus}/>
       </div>
     )
