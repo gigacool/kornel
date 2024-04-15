@@ -1,4 +1,4 @@
-import { BusInterface, ModuleInterface } from 'kornel';
+import { ICommunicationBus, IModule } from 'kornel';
 import React, { useState, useEffect } from 'react';
 
 // dirty demo code
@@ -13,8 +13,8 @@ interface LogItem {
 
 let lastValue = null; 
 
-export const LogTileWidget = function():ModuleInterface{
-  let communicationBus:BusInterface; 
+export const LogTileWidget = function():IModule{
+  let communicationBus:ICommunicationBus; 
 
   const LogTile: React.FC = () => {
     

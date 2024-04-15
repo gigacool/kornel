@@ -1,4 +1,4 @@
-import { BusInterface, ModuleInterface } from 'kornel';
+import { ICommunicationBus, IModule } from 'kornel';
 
 import './index.css';
 
@@ -7,7 +7,7 @@ import './index.css';
 // update rendering whenever an event goes through the bus
 
 type WidgetProps = {
-  bus: BusInterface,
+  bus: ICommunicationBus,
   properties:{
     title: string,
     channel: string
@@ -15,8 +15,8 @@ type WidgetProps = {
 }
 
 
-export const eventButtonModule = function():ModuleInterface{
-  let communicationBus:BusInterface; 
+export const eventButtonModule = function():IModule{
+  let communicationBus:ICommunicationBus; 
   
   const EventButtonDashboardTile: React.FC<WidgetProps> = ({bus, properties}) => {
       const title = properties?.title || 'Count'; 

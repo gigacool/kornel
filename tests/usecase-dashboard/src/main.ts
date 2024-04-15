@@ -1,6 +1,6 @@
 import './style.css'
 
-import { Kornel, BusInterface, ModuleInterface } from 'kornel';
+import { Kornel, ICommunicationBus, IModule } from 'kornel';
 
 import { titleModule } from './modules/title';
 import { dashboardModule } from './modules/dashboard';
@@ -11,7 +11,7 @@ import { eventButtonModule } from './modules/event-button';
 
 const kornel = new Kornel().create();
 
-function eventPushModule():ModuleInterface{
+function eventPushModule():IModule{
 
   return {
     initialize(bus) {

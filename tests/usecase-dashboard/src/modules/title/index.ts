@@ -1,4 +1,4 @@
-import { BusInterface, ModuleInterface } from 'kornel';
+import { ICommunicationBus, IModule } from 'kornel';
 
 import './index.css';
 
@@ -7,8 +7,8 @@ import './index.css';
 // update rendering whenever an event goes through the bus
 
 
-export const titleModule = function():ModuleInterface{
-    let communicationBus:BusInterface; 
+export const titleModule = function():IModule{
+    let communicationBus:ICommunicationBus; 
     let count = 0;
     let title = 'no title yet';
     let id = '';

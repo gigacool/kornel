@@ -1,4 +1,4 @@
-import { BusInterface, ModuleInterface } from 'kornel';
+import { ICommunicationBus, IModule } from 'kornel';
 import React, { useState, KeyboardEvent  } from 'react';
 
 import './style.css';
@@ -15,11 +15,11 @@ interface ITodo {
 
 type ITodoProps = {
   todo: ITodo;
-  bus: BusInterface
+  bus: ICommunicationBus
 };
 
 type WidgetProps = {
-  bus: BusInterface,
+  bus: ICommunicationBus,
   style?:Record<string,string|number>,
   properties?:{
     title?:string,
@@ -50,7 +50,7 @@ const TodoItem: React.FC<ITodoProps> = ({todo, bus}:ITodoProps) => {
   );
 }
 
-const Todo:React.FC<{bus:BusInterface, defaultTodos:string[]}> = ({bus, defaultTodos}) => {
+const Todo:React.FC<{bus:ICommunicationBus, defaultTodos:string[]}> = ({bus, defaultTodos}) => {
   console.log('default todos', defaultTodos)
   let [todoInput, setTodoInput] = useState<string>('');
   let [todos, setTodo] = useState<ITodo[]>(defaultTodos.map((todo, index)=>{return {key:index.toString(), status:false, description:todo}}));
@@ -89,8 +89,8 @@ const Todo:React.FC<{bus:BusInterface, defaultTodos:string[]}> = ({bus, defaultT
   )
 }
 
-export const TodoModule = function():ModuleInterface{
-  let communicationBus:BusInterface; 
+export const TodoModule = function():IModule{
+  let communicationBus:ICommunicationBus; 
 
   const TodoDashboardTile: React.FC<WidgetProps> = ({style, properties}) => {
     const title = properties?.title || 'Todo'; 

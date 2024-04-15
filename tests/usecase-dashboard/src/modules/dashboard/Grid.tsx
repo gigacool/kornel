@@ -1,14 +1,14 @@
-import GridLayout from 'react-grid-layout';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
+
+import ReactGridLayout from 'react-grid-layout';
+import { Widgets } from '.';
+import { ICommunicationBus } from '../../../../../dist/kornel';
+import React, { useEffect, useState } from 'react';
 
 import '/node_modules/react-grid-layout/css/styles.css';
 import '/node_modules/react-resizable/css/styles.css';
 import './Grid.css';
-import ReactGridLayout from 'react-grid-layout';
-import { Widgets } from '.';
-import { BusInterface } from '../../../../../dist/kornel';
-import React, { useEffect, useState } from 'react';
 
 interface DynamicLayout extends ReactGridLayout.Layout {
   widget?: string,
@@ -19,7 +19,7 @@ interface DynamicLayout extends ReactGridLayout.Layout {
 
 type GridProps = {
   widgets: Widgets,
-  bus: BusInterface
+  bus: ICommunicationBus
 }
 
 type WidgetProps = {

@@ -1,23 +1,22 @@
-import { BusInterface, ModuleInterface } from 'kornel';
+import { ICommunicationBus, IModule } from 'kornel';
+import { useEffect, useState } from 'react';
 
 import './index.css';
-import { useEffect, useState } from 'react';
 
 // dirty demo code
 // grab an id to create piece of rendering
 // update rendering whenever an event goes through the bus
 
 type WidgetProps = {
-  bus: BusInterface,
+  bus: ICommunicationBus,
   properties:{
     title: string,
     channel: string
   }
 }
 
-
-export const countModule = function():ModuleInterface{
-  let communicationBus:BusInterface; 
+export const countModule = function():IModule{
+  let communicationBus:ICommunicationBus; 
   
   const CountDashboardTile: React.FC<WidgetProps> = ({bus, properties}) => {
       const title = properties?.title || 'Count'; 
@@ -25,7 +24,7 @@ export const countModule = function():ModuleInterface{
 
       const [count, setCount] = useState(0);
 
-      const handlePropChange = (channel:string, payload:{channel:string}) => {
+      const handlePropChange = (channel:string) => {
         console.log('channel', channel, properties?.channel);
         
         if (listenChannel === '*'){
@@ -52,7 +51,6 @@ export const countModule = function():ModuleInterface{
         </div>
       )
     }
-
 
     return {
         initialize:function(bus, options:{channel:string, title:string}):void {

@@ -1,4 +1,4 @@
-import { BusInterface, CallbackFunction, ModuleInterface } from 'kornel';
+import { ICommunicationBus, IModule } from 'kornel';
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -10,12 +10,10 @@ import { Grid } from './Grid';
 
 export type Widgets = Record<string, React.FC>;
 
-export const dashboardModule = function():ModuleInterface {
-    let communicationBus:BusInterface; 
+export const dashboardModule = function():IModule {
+    let communicationBus:ICommunicationBus; 
     let id:string = '';
 
-    let isEditing = false;
-    
     let widgets:Widgets = {};
 
     return {
