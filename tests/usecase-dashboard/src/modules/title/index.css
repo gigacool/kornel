@@ -1,8 +1,27 @@
+.title-area {
+    position: relative; 
+    padding-left: 80px; 
+}
+
+.title-area:before {
+    content: ""; 
+    position: absolute; 
+    left: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    width: 60px; 
+    height: 60px; 
+    background-image: url('korn-logo.png'); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    margin-right: 10px;
+}
+
 #activate-page-edition {
     display: block;
     position:absolute;
     right: 20px;
-    top: 20px;
+    top: 10px;
     padding: 1rem;
     transition: all 0.3s;
     cursor: pointer;

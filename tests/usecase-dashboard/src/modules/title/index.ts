@@ -29,10 +29,11 @@ export const titleModule = function():ModuleInterface{
       }
       
       element.innerHTML=`
-      <h1>${title}</h1>
-      <h3>number of messages since session start: <em>${count}</em></h3>
-      <div id="activate-page-edition" onClick="${edit}">${isEditing ? 'stop':'start'} editing page</div>
-      `; 
+      <div class="title-area">
+        <h1>${title}</h1>
+        <h3>number of messages since session start: <em>${count}</em></h3>
+        <div id="activate-page-edition" onClick="${edit}">${isEditing ? 'stop':'start'} editing page</div>
+      </div>`; 
 
       let editElement = document.getElementById('activate-page-edition');
       if (editElement){
@@ -46,8 +47,6 @@ export const titleModule = function():ModuleInterface{
           id = options.id;
           title = options.title;
         
-          
-  
           bus.listen('*', ()=>{
             count++;
             render()

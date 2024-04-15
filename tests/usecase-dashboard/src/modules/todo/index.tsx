@@ -21,7 +21,10 @@ type ITodoProps = {
 type WidgetProps = {
   bus: BusInterface,
   style?:Record<string,string|number>,
-  properties?:Record<string,string|number>
+  properties?:{
+    title?:string,
+    defaultTodos?:string[]
+  }
 }
 
 const TodoItem: React.FC<ITodoProps> = ({todo, bus}:ITodoProps) => {
@@ -47,10 +50,11 @@ const TodoItem: React.FC<ITodoProps> = ({todo, bus}:ITodoProps) => {
   );
 }
 
-const Todo:React.FC<{bus:BusInterface}> = ({bus}) => {
+const Todo:React.FC<{bus:BusInterface, defaultTodos:string[]}> = ({bus, defaultTodos}) => {
+  console.log('default todos', defaultTodos)
   let [todoInput, setTodoInput] = useState<string>('');
-  let [todos, setTodo] = useState<ITodo[]>([]);
-  let [count, setCount] = useState<number>(0);
+  let [todos, setTodo] = useState<ITodo[]>(defaultTodos.map((todo, index)=>{return {key:index.toString(), status:false, description:todo}}));
+  let [count, setCount] = useState<number>(defaultTodos.length);
 
   const onClick = ():void => {
     if (todoInput === ''){
@@ -90,11 +94,11 @@ export const TodoModule = function():ModuleInterface{
 
   const TodoDashboardTile: React.FC<WidgetProps> = ({style, properties}) => {
     const title = properties?.title || 'Todo'; 
-
+    console.log('props',properties)
     return (
       <div className="todo-tile" style={style}>
         <h4>{title}</h4>
-        <Todo bus={communicationBus}/>
+        <Todo bus={communicationBus} defaultTodos={properties?.defaultTodos? properties.defaultTodos:[]}/>
       </div>
     )
   }
