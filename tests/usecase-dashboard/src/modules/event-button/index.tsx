@@ -14,19 +14,16 @@ type WidgetProps = {
   }
 }
 
-
 export const eventButtonModule = function():IModule{
   let communicationBus:ICommunicationBus; 
   
-  const EventButtonDashboardTile: React.FC<WidgetProps> = ({bus, properties}) => {
-      const title = properties?.title || 'Count'; 
-      const emitChannel = properties?.channel || '*';
+  const EventButtonDashboardTile: React.FC<WidgetProps> = ({properties}) => {
+      const title = properties.title || 'Count'; 
+      const emitChannel = properties.channel || '*';
 
-      
       const onClick = () => {
         communicationBus.emit(emitChannel, {payload:'event'});
       }
-    
       
       return (
         <div className='event-button-tile'>

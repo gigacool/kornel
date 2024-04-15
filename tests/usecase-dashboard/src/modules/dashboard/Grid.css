@@ -17,122 +17,122 @@
 }
 
 .react-grid-item.blue {
-    background-color: #508aad; /* Darker shade of pastel blue */
-    color: #fafafa; /* White text for contrast */
+    background-color: #508aad; 
+    color: #fafafa; 
   }
   
-  /* Styling for input elements within .react-grid-item.blue */
+  
   .react-grid-item.blue input {
-    background-color: #3c7aa1; /* Darker shade of pastel blue for input background */
-    border-color: #5f8a9d; /* Darker shade of border color */
-    color: #fafafa; /* Darker shade of text color */
+    background-color: #3c7aa1; 
+    border-color: #5f8a9d; 
+    color: #fafafa; 
   }
 
   .react-grid-item.blue input::placeholder{
-    color: #ccc; /* Darker shade of text color */
+    color: #ccc; 
   }
   
-  /* Styling for button elements within .react-grid-item.blue */
+  
   .react-grid-item.blue button {
-    background-color: #3c7aa1; /* Darker shade of pastel blue for button background */
-    border-color: #5f8a9d; /* Darker shade of border color */
-    color: #fafafa; /* Darker shade of text color */
+    background-color: #3c7aa1; 
+    border-color: #5f8a9d; 
+    color: #fafafa; 
   }
 
   .react-grid-item.pink {
-    background-color: #de7b6d; /* Darker shade of pastel pink */
-    color: #fafafa; /* White text for contrast */
+    background-color: #de7b6d; 
+    color: #fafafa; 
   }
   
-  /* Styling for input elements within .react-grid-item.pink */
+  
   .react-grid-item.pink input {
-    background-color: #ae5e52; /* Darker shade of pastel pink for input background */
-    border-color: #bb7c73; /* Darker shade of border color */
-    color: #fafafa; /* White text color */
+    background-color: #ae5e52; 
+    border-color: #bb7c73; 
+    color: #fafafa; 
   }
   
-  /* Styling for button elements within .react-grid-item.pink */
+  
   .react-grid-item.pink button {
-    background-color: #ae5e52; /* Darker shade of pastel pink for button background */
-    border-color: #bb7c73; /* Darker shade of border color */
-    color: #fafafa; /* White text color */
+    background-color: #ae5e52; 
+    border-color: #bb7c73; 
+    color: #fafafa; 
   }
 
-  /* Dark Pastel Green */
+  
 .react-grid-item.green {
-    background-color: #81b760; /* Darker shade of pastel green */
-    color: #fafafa; /* White text for contrast */
+    background-color: #81b760; 
+    color: #fafafa; 
   }
   
-  /* Styling for input elements within .react-grid-item.green */
+  
   .react-grid-item.green input {
-    background-color: #5d944e; /* Darker shade of pastel green for input background */
-    border-color: #729a65; /* Darker shade of border color */
-    color: #fafafa; /* White text color */
+    background-color: #5d944e; 
+    border-color: #729a65; 
+    color: #fafafa; 
   }
   
-  /* Styling for button elements within .react-grid-item.green */
+  
   .react-grid-item.green button {
-    background-color: #5d944e; /* Darker shade of pastel green for button background */
-    border-color: #729a65; /* Darker shade of border color */
-    color: #fafafa; /* White text color */
+    background-color: #5d944e; 
+    border-color: #729a65; 
+    color: #fafafa; 
   }
-  /* Dark Pastel Purple */
+  
 .react-grid-item.purple {
-    background-color: #9b70c8; /* Darker shade of pastel purple */
-    color: #fafafa; /* White text for contrast */
+    background-color: #9b70c8; 
+    color: #fafafa; 
   }
   
-  /* Styling for input elements within .react-grid-item.purple */
+  
   .react-grid-item.purple input {
-    background-color: #7c519e; /* Darker shade of pastel purple for input background */
-    border-color: #8f74b2; /* Darker shade of border color */
-    color: #fafafa; /* White text color */
+    background-color: #7c519e; 
+    border-color: #8f74b2; 
+    color: #fafafa; 
   }
   
-  /* Styling for button elements within .react-grid-item.purple */
+  
   .react-grid-item.purple button {
-    background-color: #7c519e; /* Darker shade of pastel purple for button background */
-    border-color: #8f74b2; /* Darker shade of border color */
-    color: #fafafa; /* White text color */
+    background-color: #7c519e; 
+    border-color: #8f74b2; 
+    color: #fafafa; 
   }
-/* Dark Pastel Peach */
+
 .react-grid-item.peach {
-    background-color: #e6a1af; /* Darker shade of pastel peach */
-    color: #333; /* Dark text for contrast */
+    background-color: #e6a1af; 
+    color: #333; 
   }
   
-  /* Styling for input elements within .react-grid-item.peach */
+  
   .react-grid-item.peach input {
-    background-color: #b47580; /* Darker shade of pastel peach for input background */
-    border-color: #cc8a96; /* Darker shade of border color */
-    color: #333; /* Dark text color */
+    background-color: #b47580; 
+    border-color: #cc8a96; 
+    color: #333; 
   }
   
-  /* Styling for button elements within .react-grid-item.peach */
+  
   .react-grid-item.peach button {
-    background-color: #b47580; /* Darker shade of pastel peach for button background */
-    border-color: #cc8a96; /* Darker shade of border color */
-    color: #333; /* Dark text color */
+    background-color: #b47580; 
+    border-color: #cc8a96; 
+    color: #333; 
   }
-/* Dark Pastel Yellow */
+
 .react-grid-item.yellow {
-    background-color: #e7c86f; /* Darker shade of pastel yellow */
-    color: #333; /* Dark text for contrast */
+    background-color: #e7c86f; 
+    color: #333; 
   }
   
-  /* Styling for input elements within .react-grid-item.yellow */
+  
   .react-grid-item.yellow input {
-    background-color: #baa264; /* Darker shade of pastel yellow for input background */
-    border-color: #d0b078; /* Darker shade of border color */
-    color: #333; /* Dark text color */
+    background-color: #baa264; 
+    border-color: #d0b078; 
+    color: #333; 
   }
   
-  /* Styling for button elements within .react-grid-item.yellow */
+  
   .react-grid-item.yellow button {
-    background-color: #baa264; /* Darker shade of pastel yellow for button background */
-    border-color: #d0b078; /* Darker shade of border color */
-    color: #333; /* Dark text color */
+    background-color: #baa264; 
+    border-color: #d0b078; 
+    color: #333; 
   }
       
 

@@ -28,29 +28,25 @@ type WidgetProps = {
 
 }
 
+// co-written with chatgpt
 function mergeObjects(obj1: DynamicLayout[], obj2: DynamicLayout[]): DynamicLayout[] {
   const mergedMap = new Map<string, DynamicLayout>();
 
-  obj1.forEach(item => {
+  obj1.forEach((item) => {
     mergedMap.set(item.i, { ...item });
   });
 
-  // Add or update elements from obj2 to the map
-  obj2.forEach(item => {
-    if (mergedMap.has(item.i)) {
-      // If 'i' already exists in the map, merge properties
-      const existingItem = mergedMap.get(item.i)!;
-      mergedMap.set(item.i, { ...existingItem, ...item });
-    } else {
-      // If 'i' does not exist in the map, add new item
+  obj2.forEach((item) => {
+    if (!mergedMap.has(item.i)) {
       mergedMap.set(item.i, { ...item });
-    }
+      return;
+    } 
+
+    mergedMap.set(item.i, { ...mergedMap.get(item.i), ...item });
+    
   });
 
-  // Convert the map values back to an array of objects
-  const mergedObjects = Array.from(mergedMap.values());
-
-  return mergedObjects;
+  return Array.from(mergedMap.values());
 }
 
 export function Grid(props: GridProps) {
@@ -92,10 +88,7 @@ export function Grid(props: GridProps) {
   })
 
   useEffect(() => {
-
-    // Subscribe to specific event for prop change
     props.bus.listen('GLOBAL_EDIT_MODE', handleChange);
-
     return () => { };
   }, []);
 
@@ -121,17 +114,22 @@ export function Grid(props: GridProps) {
       rowHeight={180}
     >
       {layout.map((configuration) => {
-        return (<div key={configuration.i} className={configuration.colorTheme} >
-          {configuration.widget ?
-            React.createElement<WidgetProps>(
-              props.widgets[configuration.widget],
-              {
-                style: configuration.style,
-                properties: configuration.properties
-              }
-            ) : null
-          }
-        </div>)
+        return (
+          <div 
+            key={configuration.i} 
+            className={configuration.colorTheme} 
+          >
+            {configuration.widget ?
+              React.createElement<WidgetProps>(
+                props.widgets[configuration.widget],
+                {
+                  style: configuration.style,
+                  properties: configuration.properties
+                }
+              ) : null
+            }
+          </div>
+        )
       })}
     </ResponsiveReactGridLayout>
   );

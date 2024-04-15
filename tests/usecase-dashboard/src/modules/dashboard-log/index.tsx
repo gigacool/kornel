@@ -11,40 +11,28 @@ interface LogItem {
   log: string;
 }
 
-let lastValue = null; 
-
 export const LogTileWidget = function():IModule{
   let communicationBus:ICommunicationBus; 
 
   const LogTile: React.FC = () => {
     
     const [items, setItems] = useState<LogItem[]>([]);
+
     const handlePropChange = (channel:string, newValue:any) => {
-      // if (newValue === lastValue){
-      //   return;
-      // }
       const newEntry = {
         timestamp:Date.now(), 
         channel:channel, 
         log:JSON.stringify(newValue)
       };
       setItems((prevItems) => {
-        // if(prevItems.find((entry)=>entry.log == newEntry.log)){
-        //   return prevItems;
-        // }
         return [newEntry, ...prevItems];
       });
-      newValue = lastValue;
     };
+
     useEffect(() => {
-  
-      // Subscribe to specific event for prop change
       communicationBus.listen('*', handlePropChange);
-  
-      return () => {
-       
-      };
-    }, []); // Run effect only once on component mount
+      return () => {};
+    }, []); 
 
       return (
         <div className="log-tile">

@@ -13,7 +13,6 @@ export type Widgets = Record<string, React.FC>;
 export const dashboardModule = function():IModule {
     let communicationBus:ICommunicationBus; 
     let id:string = '';
-
     let widgets:Widgets = {};
 
     return {
@@ -24,22 +23,24 @@ export const dashboardModule = function():IModule {
             communicationBus.listen('REGISTER_DASHBOARD_WIDGET', (_channel:string, payload:{id:string, widget:React.FC}) => {
                 let id:string = payload.id;
                 widgets[id] = payload.widget; 
-            });
-
-
-
-
-            
+            });            
         },
         start:function(){
             let element = document.getElementById(id);
-            if (element){
-                ReactDOM.createRoot(element).render(
-                <React.StrictMode>
-                    <Grid widgets={widgets}  bus={communicationBus} />
-                </React.StrictMode>,
-                )
+
+            if (!element){
+                return;
             }
+
+            ReactDOM.createRoot(element).render(
+                <React.StrictMode>
+                    <Grid 
+                        widgets={widgets}  
+                        bus={communicationBus}
+                    />
+                </React.StrictMode>
+            )
+            
         }
     }
 };

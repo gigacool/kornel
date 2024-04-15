@@ -1,9 +1,6 @@
-.count-tile {
-    
-}
 
-.count-tile .metric {
-margin: auto;
+.count-tile .counter {
+    margin: auto;
     font-size: 4rem;
     font-weight: 600;
     position: absolute;

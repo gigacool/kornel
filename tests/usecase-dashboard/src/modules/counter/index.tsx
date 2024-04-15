@@ -47,7 +47,7 @@ export const countModule = function():IModule{
       return (
         <div className='count-tile'>
           <h4>{title}</h4>
-          <div className='metric'>{count}</div>
+          <div className='counter'>{count}</div>
         </div>
       )
     }

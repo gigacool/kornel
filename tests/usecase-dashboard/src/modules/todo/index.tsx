@@ -33,7 +33,7 @@ const TodoItem: React.FC<ITodoProps> = ({todo, bus}:ITodoProps) => {
   
   const handleCheckboxChange = () => {
     setChecked(!checked); 
-    bus.emit('TODO', {payload:{description:todo.description, action:checked ? 'uncheck':'check'}});
+    bus.emit('TODO', {payload:{description:todo.description, checked:checked ? 'uncheck':'check'}});
   };
 
   return (
@@ -63,7 +63,7 @@ const Todo:React.FC<{bus:ICommunicationBus, defaultTodos:string[]}> = ({bus, def
     setCount(count+1);
     setTodo((currentValue)=>[{key:Number(count++).toString(), status:false, description:todoInput}, ...currentValue]);
     setTodoInput('');
-    bus.emit('TODO', {payload:{description:todoInput, action:'add'}});
+    bus.emit('TODO', {payload:{description:todoInput, checked:'add'}});
   }
 
   const handleKeyDown = (e:KeyboardEvent<HTMLInputElement>) => {
@@ -77,7 +77,7 @@ const Todo:React.FC<{bus:ICommunicationBus, defaultTodos:string[]}> = ({bus, def
       <input 
         type="text" 
         value={todoInput} 
-        placeholder='add task' 
+        placeholder='new todo' 
         onChange={e => setTodoInput(e.target.value)}
         onKeyDown={handleKeyDown}
       />
