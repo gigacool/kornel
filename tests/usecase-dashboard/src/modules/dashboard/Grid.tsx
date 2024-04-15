@@ -87,7 +87,7 @@ export function Grid(props: GridProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [layout, setLayout] = useState<DynamicLayout[]>(defaultLayout);
 
-  const handleChange = ((channel: string, payload: { status: boolean }) => {
+  const handleChange = ((_channel: string, payload: { status: boolean }) => {
     setIsEditing(payload.status);
   })
 

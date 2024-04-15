@@ -18,7 +18,7 @@ type WidgetProps = {
 export const countModule = function():IModule{
   let communicationBus:ICommunicationBus; 
   
-  const CountDashboardTile: React.FC<WidgetProps> = ({bus, properties}) => {
+  const CountDashboardTile: React.FC<WidgetProps> = ({properties}) => {
       const title = properties?.title || 'Count'; 
       const listenChannel = properties?.channel || '*';
 
