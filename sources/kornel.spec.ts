@@ -1,4 +1,4 @@
-import { ModuleInterface } from './ModuleInterface';
+import { IModule } from './types/index';
 import { Kore } from './kore/kore';
 import Kornel  from './kornel';
 
@@ -23,14 +23,14 @@ describe('library interation test', function(){
         const onMessage = jest.fn();
         const payload = JSON.stringify({test:'test', data:'json data'});
 
-        const moduleListener:ModuleInterface = {
+        const moduleListener:IModule = {
             initialize(bus) {
                 bus.listen('test', onMessage);
             },
             start(){}
         }
 
-        const moduleEmiter:ModuleInterface = {
+        const moduleEmiter:IModule = {
             initialize(bus) {
                 bus.emit('test', {payload:payload});
             },

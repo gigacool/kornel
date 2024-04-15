@@ -1,7 +1,5 @@
 import { Kore } from './kore';
-
-import { BusInterface } from '../bus/BusInterface';
-import { ModuleInterface } from '../ModuleInterface';
+import { ICommunicationBus, IModule } from '../kornel';
 
 describe('core component of the plugin orchhestrator', function(){
 
@@ -12,7 +10,7 @@ describe('core component of the plugin orchhestrator', function(){
     describe('register module', function(){
 
         let kore:Kore;
-        let bus:BusInterface;
+        let bus:ICommunicationBus;
 
         beforeEach(function(){
             bus = {
@@ -27,7 +25,7 @@ describe('core component of the plugin orchhestrator', function(){
         });
 
         it('should register a module', function(){
-            const mockModule: ModuleInterface = {
+            const mockModule: IModule = {
                 initialize: jest.fn(),
                 start:jest.fn()
               };
@@ -39,7 +37,7 @@ describe('core component of the plugin orchhestrator', function(){
         });
 
         it('should accept an optional option property', function(){
-            const mockModule: ModuleInterface = {
+            const mockModule: IModule = {
                 initialize: jest.fn(),
                 start:jest.fn()
               };
@@ -52,11 +50,11 @@ describe('core component of the plugin orchhestrator', function(){
         });
 
         it('should not register a module with duplicate identifier', function(){
-            const okModule: ModuleInterface = {
+            const okModule: IModule = {
                 initialize: jest.fn(),
                 start:jest.fn()
             };
-            const nokModule: ModuleInterface = {
+            const nokModule: IModule = {
                 initialize: jest.fn(),
                 start:jest.fn()
             };
@@ -73,7 +71,7 @@ describe('core component of the plugin orchhestrator', function(){
         });
 
         it('should enable chaining capability', function(){
-            const mockModule: ModuleInterface = {
+            const mockModule: IModule = {
                 initialize: jest.fn(),
                 start:jest.fn()
               };
@@ -85,11 +83,11 @@ describe('core component of the plugin orchhestrator', function(){
 
         
         it('should enable chaining capability when registering fails', function(){
-            const okModule: ModuleInterface = {
+            const okModule: IModule = {
                 initialize: jest.fn(),
                 start:jest.fn()
             };
-            const nokModule: ModuleInterface = {
+            const nokModule: IModule = {
                 initialize: jest.fn(),
                 start:jest.fn()
             };
@@ -105,7 +103,7 @@ describe('core component of the plugin orchhestrator', function(){
     describe('run modules', function(){
 
         let kore:Kore;
-        let bus:BusInterface;
+        let bus:ICommunicationBus;
 
         beforeEach(function(){
             bus = {
@@ -126,7 +124,7 @@ describe('core component of the plugin orchhestrator', function(){
         it('should run initialize method of a single module registered', function(){
 
             const callOrder:string[] = [];
-            const mockModule: ModuleInterface = {
+            const mockModule: IModule = {
                 initialize: jest.fn().mockImplementation(() => callOrder.push('init')),
                 start:jest.fn().mockImplementation(() => callOrder.push('start'))
               };
@@ -144,7 +142,7 @@ describe('core component of the plugin orchhestrator', function(){
         it('should run initialize method of multiple modules registered', function(){
             const modules = [];
             for(let i = 0; i < 3; i++){
-                const mockModule: ModuleInterface = {
+                const mockModule: IModule = {
                     initialize: jest.fn(),
                     start:jest.fn()
                   };
@@ -162,11 +160,11 @@ describe('core component of the plugin orchhestrator', function(){
         });
 
         it('should try and initialize despite failing modules', function(){
-            const mockModule: ModuleInterface = {
+            const mockModule: IModule = {
                 initialize: jest.fn(),
                 start:jest.fn()
             };
-            const faultyModule: ModuleInterface = {
+            const faultyModule: IModule = {
                 initialize: jest.fn().mockImplementation(() => {
                     throw new Error('Some initialization error');
                 }),
@@ -184,11 +182,11 @@ describe('core component of the plugin orchhestrator', function(){
         });
 
         it('should try and start despite failing modules', function(){
-            const mockModule: ModuleInterface = {
+            const mockModule: IModule = {
                 initialize: jest.fn(),
                 start:jest.fn()
             };
-            const faultyModule: ModuleInterface = {
+            const faultyModule: IModule = {
                 initialize:jest.fn(),
                 start: jest.fn().mockImplementation(() => {
                     throw new Error('Some initialization error');

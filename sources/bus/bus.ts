@@ -1,18 +1,14 @@
+import { ICommunicationBus, Callback, Payload } from "../types/index";
 
+export class Bus implements ICommunicationBus {
 
-import { Payload } from "../PayloadInterface";
-import { BusInterface, CallbackFunction } from "./BusInterface";
-export { BusInterface, CallbackFunction } from "./BusInterface";
-
-export class Bus implements BusInterface {
-
-    private channels:Record<string, CallbackFunction[]>;
+    private channels:Record<string, Callback[]>;
 
     constructor(){
         this.channels = {};
     }
 
-    listen(channel:string, callback:CallbackFunction):Bus {
+    listen(channel:string, callback:Callback):Bus {
         if (!this.channels[channel]){
             this.channels[channel] = [];
         }
@@ -27,7 +23,7 @@ export class Bus implements BusInterface {
     }
 
     emit(channel:string, payload:Payload):void {
-        (this.channels[channel] || []).forEach(function(callback:CallbackFunction){
+        (this.channels[channel] || []).forEach(function(callback:Callback){
             try {
                 callback(channel, payload.payload);
             } catch(error){
@@ -36,7 +32,7 @@ export class Bus implements BusInterface {
             }
         });
         
-        (this.channels['*'] || []).forEach(function(callback:CallbackFunction){
+        (this.channels['*'] || []).forEach(function(callback:Callback){
             try {
                 callback(channel, payload.payload);
             } catch(error){
