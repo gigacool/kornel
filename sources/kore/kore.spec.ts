@@ -14,8 +14,8 @@ describe('core component of the plugin orchhestrator', function(){
 
         beforeEach(function(){
             bus = {
-                listen:jest.fn(),
-                emit:jest.fn(),
+                subscribe:jest.fn(),
+                publish:jest.fn(),
             }
             kore = new Kore(bus);
         })
@@ -107,8 +107,8 @@ describe('core component of the plugin orchhestrator', function(){
 
         beforeEach(function(){
             bus = {
-                listen:jest.fn(),
-                emit:jest.fn(),
+                subscribe:jest.fn(),
+                publish:jest.fn(),
             }
             kore = new Kore(bus);
         })

@@ -8,13 +8,13 @@ export class Bus implements ICommunicationBus {
         this.channels = {};
     }
 
-    listen(channel:string, callback:Callback):Bus {
+    subscribe(channel:string, callback:Callback):Bus {
         if (!this.channels[channel]){
             this.channels[channel] = [];
         }
 
         if (this.channels[channel].find((c) => c === callback)){
-            console.error(`callback is already listening on channel "${channel}"`)
+            console.error(`callback is already subscribeing on channel "${channel}"`)
             return this;
         }
 
@@ -22,7 +22,7 @@ export class Bus implements ICommunicationBus {
         return this;
     }
 
-    emit(channel:string, payload:Payload):void {
+    publish(channel:string, payload:Payload):void {
         (this.channels[channel] || []).forEach(function(callback:Callback){
             try {
                 callback(channel, payload.payload);

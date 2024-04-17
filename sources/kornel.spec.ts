@@ -25,19 +25,19 @@ describe('library interation test', function(){
 
         const moduleListener:IModule = {
             initialize(bus) {
-                bus.listen('test', onMessage);
+                bus.subscribe('test', onMessage);
             },
             start(){}
         }
 
         const moduleEmiter:IModule = {
             initialize(bus) {
-                bus.emit('test', {payload:payload});
+                bus.publish('test', {payload:payload});
             },
             start(){}
         }
-        kore.register('module-listener', moduleListener);
-        kore.register('module-emiter', moduleEmiter);
+        kore.register('module-subscribeer', moduleListener);
+        kore.register('module-publisher', moduleEmiter);
 
         kore.run();
 

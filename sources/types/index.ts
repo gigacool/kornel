@@ -1,11 +1,13 @@
 /** Communication Bus interface */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+/** Calback type refers to callback functions used when communicating via the communication bus */
 export type Callback = (channel:string, payload:any) => void;
 
+/** The communication bus interfaces describbe the functions available to subscribe to, and publish messages. */
 export interface ICommunicationBus {
-    listen(channel:string, callback:Callback):ICommunicationBus;
-    emit(channel:string, payload:Payload):void;
+    subscribe(channel:string, callback:Callback):ICommunicationBus;
+    publish(channel:string, payload:Payload):void;
 }
 export type Options = Record<string,unknown>;
 
