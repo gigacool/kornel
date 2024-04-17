@@ -88,7 +88,7 @@ export function Grid(props: GridProps) {
   })
 
   useEffect(() => {
-    props.bus.listen('GLOBAL_EDIT_MODE', handleChange);
+    props.bus.subscribe('GLOBAL_EDIT_MODE', handleChange);
     return () => { };
   }, []);
 

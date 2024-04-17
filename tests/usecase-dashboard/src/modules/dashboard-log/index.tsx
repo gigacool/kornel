@@ -30,7 +30,7 @@ export const LogTileWidget = function():IModule{
     };
 
     useEffect(() => {
-      communicationBus.listen('*', handlePropChange);
+      communicationBus.subscribe('*', handlePropChange);
       return () => {};
     }, []); 
 
@@ -55,7 +55,7 @@ export const LogTileWidget = function():IModule{
     return {
         initialize:function(bus):void {
           communicationBus = bus;
-          bus.emit('REGISTER_DASHBOARD_WIDGET', {payload:{id:'log-tile', widget:LogTile}})
+          bus.publish('REGISTER_DASHBOARD_WIDGET', {id:'log-tile', widget:LogTile})
         },
         start:function():void {
           // nop

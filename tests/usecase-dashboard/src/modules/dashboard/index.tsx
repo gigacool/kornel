@@ -20,7 +20,8 @@ export const dashboardModule = function():IModule {
             communicationBus = bus;
             id = options.id;
 
-            communicationBus.listen('REGISTER_DASHBOARD_WIDGET', (_channel:string, payload:{id:string, widget:React.FC}) => {
+            communicationBus.subscribe('REGISTER_DASHBOARD_WIDGET', (_channel:string, payload:{id:string, widget:React.FC}) => {
+                console.log('widget register', payload)
                 let id:string = payload.id;
                 widgets[id] = payload.widget; 
             });            

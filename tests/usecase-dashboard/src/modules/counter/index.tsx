@@ -20,26 +20,26 @@ export const countModule = function():IModule{
   
   const CountDashboardTile: React.FC<WidgetProps> = ({properties}) => {
       const title = properties?.title || 'Count'; 
-      const listenChannel = properties?.channel || '*';
+      const subscribeChannel = properties?.channel || '*';
 
       const [count, setCount] = useState(0);
 
       const handlePropChange = (channel:string) => {
         console.log('channel', channel, properties?.channel);
         
-        if (listenChannel === '*'){
+        if (subscribeChannel === '*'){
           setCount(count+1);
           return;
         }
         
-        if (listenChannel === channel){
+        if (subscribeChannel === channel){
           setCount(count+1);
           return;
         }
         
       }
     
-      communicationBus.listen(listenChannel, handlePropChange);
+      communicationBus.subscribe(subscribeChannel, handlePropChange);
       useEffect(() => {
         return () => {};
       }, []);
@@ -56,14 +56,12 @@ export const countModule = function():IModule{
         initialize:function(bus, options:{channel:string, title:string}):void {
           communicationBus = bus;
           console.log('resitering counter')
-          communicationBus.emit('REGISTER_DASHBOARD_WIDGET', {
-            payload:{
+          communicationBus.publish('REGISTER_DASHBOARD_WIDGET', {
               id:'count-dashboard-tile',
               channel: options?.channel || '*', 
               widget:CountDashboardTile, 
               title:options?.title,
               bus:bus
-            }
           }
         )
         },

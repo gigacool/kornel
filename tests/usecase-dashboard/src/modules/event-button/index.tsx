@@ -19,10 +19,10 @@ export const eventButtonModule = function():IModule{
   
   const EventButtonDashboardTile: React.FC<WidgetProps> = ({properties}) => {
       const title = properties.title || 'Count'; 
-      const emitChannel = properties.channel || '*';
+      const publishChannel = properties.channel || '*';
 
       const onClick = () => {
-        communicationBus.emit(emitChannel, {payload:'event'});
+        communicationBus.publish(publishChannel, {payload:'event'});
       }
       
       return (
@@ -37,14 +37,12 @@ export const eventButtonModule = function():IModule{
     return {
         initialize:function(bus, options:{channel:string, title:string}):void {
           communicationBus = bus;
-          communicationBus.emit('REGISTER_DASHBOARD_WIDGET', {
-            payload:{
+          communicationBus.publish('REGISTER_DASHBOARD_WIDGET', {
               id:'event-button-dashboard-tile',
               channel: options?.channel || '*', 
               widget:EventButtonDashboardTile, 
               title:options?.title,
               bus:bus
-            }
           }
         )
         },

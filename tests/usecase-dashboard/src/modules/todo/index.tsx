@@ -33,7 +33,7 @@ const TodoItem: React.FC<ITodoProps> = ({todo, bus}:ITodoProps) => {
   
   const handleCheckboxChange = () => {
     setChecked(!checked); 
-    bus.emit('TODO', {payload:{description:todo.description, checked:checked ? 'uncheck':'check'}});
+    bus.publish('TODO', {description:todo.description, checked:checked ? 'uncheck':'check'});
   };
 
   return (
@@ -63,7 +63,7 @@ const Todo:React.FC<{bus:ICommunicationBus, defaultTodos:string[]}> = ({bus, def
     setCount(count+1);
     setTodo((currentValue)=>[{key:Number(count++).toString(), status:false, description:todoInput}, ...currentValue]);
     setTodoInput('');
-    bus.emit('TODO', {payload:{description:todoInput, checked:'add'}});
+    bus.publish('TODO', {description:todoInput, checked:'add'});
   }
 
   const handleKeyDown = (e:KeyboardEvent<HTMLInputElement>) => {
@@ -106,12 +106,10 @@ export const TodoModule = function():IModule{
   return {
       initialize:function(bus):void {
         communicationBus = bus;
-        bus.emit('REGISTER_DASHBOARD_WIDGET', {
-            payload:{
+        bus.publish('REGISTER_DASHBOARD_WIDGET', {
               id:'todo-dashboard-tile', 
               widget:TodoDashboardTile, 
               bus:bus
-            }
           }
         )
       },

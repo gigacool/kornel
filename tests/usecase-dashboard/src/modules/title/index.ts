@@ -16,7 +16,7 @@ export const titleModule = function():IModule{
 
     function toggleEditMode(){
       isEditing = !isEditing;
-      communicationBus.emit('GLOBAL_EDIT_MODE', {payload:{status:isEditing}});
+      communicationBus.publish('GLOBAL_EDIT_MODE', {status:isEditing});
     }
 
     function render():void {
@@ -46,7 +46,7 @@ export const titleModule = function():IModule{
           id = options.id;
           title = options.title;
         
-          communicationBus.listen('*', ()=>{
+          communicationBus.subscribe('*', ()=>{
             count++;
             render()
           })
