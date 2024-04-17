@@ -25,7 +25,7 @@ export class Bus implements ICommunicationBus {
     publish(channel:string, payload:Payload):void {
         (this.channels[channel] || []).forEach(function(callback:Callback){
             try {
-                callback(channel, payload.payload);
+                callback(channel, payload);
             } catch(error){
                 console.error(`callback threw while running`);
                 console.error(error);
@@ -34,7 +34,7 @@ export class Bus implements ICommunicationBus {
         
         (this.channels['*'] || []).forEach(function(callback:Callback){
             try {
-                callback(channel, payload.payload);
+                callback(channel, payload);
             } catch(error){
                 console.error(`callback threw while running`);
                 console.error(error);
