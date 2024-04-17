@@ -93,8 +93,8 @@ button {
 
 
 
-@media (prefers-color-scheme: light) {
-  :root {
+@media (prefers-color-scheme: dark) {
+  /* :root {
     color: #213547;
     background-color: #ffffff;
   }
@@ -103,5 +103,5 @@ button {
   }
   button {
     background-color: #f9f9f9;
-  }
+  } */
 }

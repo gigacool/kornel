@@ -14,7 +14,7 @@ interface DynamicLayout extends ReactGridLayout.Layout {
   widget?: string,
   style?: Record<string, string | number>,
   colorTheme?: string,
-  properties?: Record<string, string | string[] | number>
+  properties?: Record<string, string | string[] | number | unknown>
 }
 
 type GridProps = {
@@ -24,7 +24,7 @@ type GridProps = {
 
 type WidgetProps = {
   style?: Record<string, string | number>,
-  properties?: Record<string, string | string[] | number>,
+  properties?: Record<string, string | string[] | number | unknown>,
 
 }
 
@@ -57,7 +57,7 @@ export function Grid(props: GridProps) {
       x: 0,
       y: 0,
       w: 2,
-      h: 3,
+      h: 2,
       static: true,
       widget: 'todo-dashboard-tile',
       colorTheme: 'blue',
@@ -66,13 +66,15 @@ export function Grid(props: GridProps) {
         defaultTodos: ['brush my teeth', 'cleanup kitchen', 'do some workout', 'cook diner', 'check a blink']
       }
     },
+
     { i: "b", x: 2, y: 0, w: 2, h: 1, minW: 2, maxW: 4, widget: 'todo-dashboard-tile', colorTheme: 'pink', properties: { title: "Weekly todo" } },
     { i: "c", x: 2, y: 2, w: 1, h: 1, colorTheme: 'purple', widget: 'count-dashboard-tile' },
     { i: "d", x: 3, y: 2, w: 1, h: 1, colorTheme: 'yellow', widget: 'count-dashboard-tile', properties: { title: 'actions checking', channel: 'TODO' } },
     { i: "e", x: 2, y: 3, w: 1, h: 1, colorTheme: 'peach', widget: 'event-button-dashboard-tile', properties: { title: 'ping action', channel: 'PING' } },
     { i: "f", x: 3, y: 3, w: 1, h: 1, colorTheme: 'green', widget: 'event-button-dashboard-tile', properties: { title: 'pong action', channel: 'PONG' } },
     { i: "g", x: 4, y: 0, w: 2, h: 2, maxW: 8, widget: 'log-tile', colorTheme: '' },
-    { i: "h", x: 4, y: 3, w: 2, h: 1, widget: 'count-dashboard-tile', colorTheme: 'peach', properties: { title: 'Ping events', channel: 'PING' } },
+    { i: "h", x: 4, y: 3, w: 2, h: 1, widget: 'count-dashboard-tile', colorTheme: 'peach', properties: { title: 'Ping events', channel: 'PING', event:{channel:'PING'} } },
+    { i: "i", x: 0, y: 3, w: 2, h: 1, colorTheme: 'blue', widget: 'event-button-dashboard-tile', properties: { title: 'Hello world action', channel:'helloWorld', message:'Bonjour le monde' }},
   ];
 
   let savedLayout = localStorage.getItem('grid');

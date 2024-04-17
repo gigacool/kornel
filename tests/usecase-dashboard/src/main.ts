@@ -2,6 +2,7 @@ import './style.css'
 
 import { Kornel } from 'kornel';
 
+import { helloWorld } from './modules/hello-world';
 import { titleModule } from './modules/title';
 import { dashboardModule } from './modules/dashboard';
 import { LogTileWidget } from './modules/dashboard-log';
@@ -10,6 +11,8 @@ import { countModule } from './modules/counter';
 import { eventButtonModule } from './modules/event-button';
 
 const kornel = new Kornel().create();
+
+kornel.register('hello-world', helloWorld);
 
 kornel.register('grid', dashboardModule(), {id:'grid'});
 
