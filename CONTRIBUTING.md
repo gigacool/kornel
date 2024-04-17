@@ -2,6 +2,8 @@
 
 Welcome to the contribution guide for kornel project! We appreciate your interest in improving our TypeScript library. Before contributing, please take a moment to review the guidelines outlined below to ensure a smooth and collaborative development process.
 
+This document was generated using openai chatgpt, it is to be reviewed and improved.
+
 ## Code Quality and Standards
 
 - Follow established coding conventions and style guidelines.
